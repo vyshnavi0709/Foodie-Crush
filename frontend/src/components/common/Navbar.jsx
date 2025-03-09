@@ -30,18 +30,17 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const address = useLocation();
 
-  // Updated colors
-  const bgColor = useColorModeValue("#f8f9fa", "#343a40"); // Light and dark mode background colors
-  const textColor = useColorModeValue("#333333", "#f1f1f1"); // Text color for light/dark mode
-  const borderColor = useColorModeValue("#e0e0e0", "#495057"); // Border color for light/dark mode
-  const signInColor = useColorModeValue("#6c757d", "#adb5bd"); // SignIn button color for light/dark mode
+  const bgColor = useColorModeValue("white", "gray.800");
+  const textColor = useColorModeValue("primary-500", "white");
+  const borderColor = useColorModeValue("gray.200", "gray.900");
+  const signInColor = useColorModeValue("gray.600", "gray.200");
 
   const logoutHandler = () => {
     dispatch(logoutUser(token, toast, navigate));
   };
 
-  if (address.pathname === "/admin") {
-    return null; // Don't render the navbar for /admin path
+  if(address.pathname === "/admin") {
+    return 
   }
 
   return (
@@ -84,8 +83,10 @@ export const Navbar = () => {
             fontFamily={"Kaushan Script"}
             color={textColor}
           >
-            Cookbook
-            <Text display="inline" color="#ff6347"> Hub</Text> {/* Updated name */}
+            Recipe
+            <Text display="inline" color="primary.500">
+              Hub
+            </Text>
           </Text>
 
           <Flex
@@ -114,7 +115,7 @@ export const Navbar = () => {
                     color={textColor}
                     _hover={{
                       opacity: 1,
-                      color: "#ff6347", // Changed hover color
+                      color: "primary.500",
                     }}
                     aria-label="Notifications"
                   >
@@ -130,9 +131,6 @@ export const Navbar = () => {
               <Button
                 onClick={logoutHandler}
                 size={{ lg: "lg", md: "md", base: "sm" }}
-                bg="#ff6347" // Logout button color
-                color="white"
-                _hover={{ bg: "#e53e3e" }} // Hover color for logout button
               >
                 Logout
               </Button>
@@ -151,9 +149,6 @@ export const Navbar = () => {
                 size={{ lg: "lg", md: "md", base: "sm" }}
                 as={Link}
                 to="/signup"
-                bg="#ff6347" // Sign-up button color
-                color="white"
-                _hover={{ bg: "#e53e3e" }} // Hover color for sign-up button
               >
                 SignUp
               </Button>
@@ -166,22 +161,22 @@ export const Navbar = () => {
 };
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue("#333333", "#f1f1f1");
-  const linkHoverColor = useColorModeValue("#ff6347", "#ff6347"); // Updated hover color
+  const linkColor = useColorModeValue("text", "white");
+  const linkHoverColor = useColorModeValue("primary.500", "teal.500");
   const isAuth = useSelector((store) => store.authReducer.isAuth);
   const token = useSelector((store) => store.authReducer.token);
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
 
-  const bgColor = useColorModeValue("#f8f9fa", "#343a40");
-  const textColor = useColorModeValue("#ff6347", "#f1f1f1"); // Text color for buttons
-  const borderColor = useColorModeValue("#e0e0e0", "#495057");
+  const bgColor = useColorModeValue("white", "gray.800");
+  const textColor = useColorModeValue("primary-500", "white");
+  const borderColor = useColorModeValue("gray.200", "gray.900");
+  const signInColor = useColorModeValue("gray.600", "gray.200");
 
   const logoutHandler = () => {
     dispatch(logoutUser(token, toast, navigate));
   };
-
   return (
     <Flex gap="1rem" alignItems={"center"}>
       <Flex gap="1rem" alignItems={"center"}>
@@ -234,7 +229,7 @@ const DesktopNav = () => {
                   color={textColor}
                   _hover={{
                     opacity: 1,
-                    color: "#ff6347", // Hover color for notifications
+                    color: "primary.500",
                   }}
                   aria-label="Notifications"
                 >
@@ -250,9 +245,6 @@ const DesktopNav = () => {
             <Button
               onClick={logoutHandler}
               size={{ lg: "lg", md: "md", base: "sm" }}
-              bg="#ff6347" // Logout button color
-              color="white"
-              _hover={{ bg: "#e53e3e" }} // Hover color for logout button
             >
               Logout
             </Button>
@@ -271,9 +263,6 @@ const DesktopNav = () => {
               size={{ lg: "lg", md: "md", base: "sm" }}
               as={Link}
               to="/signup"
-              bg="#ff6347" // Sign-up button color
-              color="white"
-              _hover={{ bg: "#e53e3e" }} // Hover color for sign-up button
             >
               SignUp
             </Button>
@@ -285,7 +274,7 @@ const DesktopNav = () => {
 };
 
 const MobileNav = () => {
-  const bgColor = useColorModeValue("#f8f9fa", "#343a40");
+  const bgColor = useColorModeValue("white", "gray.800");
 
   return (
     <Stack bg={bgColor} p={4} display={{ md: "none", base: "flex" }}>
@@ -303,7 +292,7 @@ const MobileNavItem = ({ label, href }) => {
       as={Link}
       to={href ?? "#"}
       fontWeight={600}
-      color={useColorModeValue("#ff6347", "white")}
+      color={useColorModeValue("primary.500", "white")}
       _hover={{
         textDecoration: "none",
       }}
